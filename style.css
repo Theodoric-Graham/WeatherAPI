@@ -1,0 +1,36 @@
+* {
+  padding: 1px;
+  text-align: center;
+}
+header {
+  background-color: lightgreen;
+  color: black;
+}
+button {
+  padding: 12px;
+  margin: auto;
+}
+br {
+  border: 10px;
+}
+p {
+  margin: 20px;
+  text-align: center;
+}
+input {
+  display: inline-block;
+}
+.topPanel {
+  background: lightblue;
+}
+.bottomPanel {
+  background: lightcoral;
+}
+aside {
+  float: left;
+  width: 20%;
+  height: 100%;
+}
+.card {
+  margin: 0 0 20px 0;
+}
