@@ -4,11 +4,14 @@ const btnContainer = document.querySelector('.btn-container');
 const btnWeather = document.querySelector('.btn-weather');
 const weatherContainer = document.querySelector('.weather-container');
 const forecastContainer = document.querySelector('.five-day');
+const clearBtn = document.querySelector('.clear');
+
+let oldContainer;
+let currCity;
+let currState;
 
 //used to dynamically set days
 const weekday = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
-
-let currCity;
 
 //asks for geolocation
 const getPosition = async function () {
@@ -26,11 +29,19 @@ const populateFields = function (data) {
   document.getElementById('uv').innerHTML = data.current.uvi;
 };
 
+const clearFields = function () {
+  document.getElementById('city-name').innerHTML = 0;
+  document.getElementById('temp').innerHTML = 0;
+  document.getElementById('wind').innerHTML = 0;
+  document.getElementById('humidity').innerHTML = 0;
+  document.getElementById('uv').innerHTML = 0;
+};
+
 const renderForecast = function (dataArr) {
   //only want the 5 day forecast
   dataArr.splice(5, 3);
   //uses new array
-  dataArr.map((el, index) => {
+  dataArr.map(el => {
     //getting current day
     const dt = el.dt;
     const currentDay = new Date(dt * 1000);
@@ -38,28 +49,39 @@ const renderForecast = function (dataArr) {
     //creating dynamic html template
     const html = `
     
-    <div class="weather-forecast" id="${index}">
-          <div class="weather-forecast-item">
-          <div class="city-state">${currCity}</div>
-
-            <div class="day">${day}</div>
-            <img src="http://openweathermap.org/img/wn/${el.weather[0].icon}@2x.png" alt="weather icon" class="w-icon" />
-            <div class="temp">Night: ${el.temp.night}</div>
-            <div class="temp">Day: ${el.temp.day}</div>
-            <div class="wind">Wind Speed: ${el.wind_speed} mph</div>
-            <div class="humidity">Humidity: ${el.humidity}</div>
-            <div class="uv">UV Index: ${el.uvi}</div>
-          </div>
+    <div class="weather-forecast" id="${'old'}">
+    <div class="weather-forecast-item">
+    <div class="city-state">${currCity}, ${currState} </div>
+    
+    <div class="day">${day}</div>
+    <div class="img-container">
+    <img src="http://openweathermap.org/img/wn/${
+      el.weather[0].icon
+    }@2x.png" alt="weather icon" class="w-icon" />
+    </div>
+    <div class="temp">Night: ${el.temp.night}</div>
+    <div class="temp">Day: ${el.temp.day}</div>
+    <div class="wind">Wind Speed: ${el.wind_speed} mph</div>
+    <div class="humidity">Humidity: ${el.humidity}</div>
+    <div class="uv">UV Index: ${el.uvi}</div>
+    </div>
     `;
     //appending to DOM
     forecastContainer.insertAdjacentHTML('beforeend', html);
+    oldContainer = document.querySelectorAll('#old');
   });
 };
 
+const clearContainer = function () {
+  clearFields();
+  oldContainer.forEach(el => {
+    el.remove();
+  });
+};
+clearBtn.addEventListener('click', clearContainer);
+
 const localWeather = async function (lat, lng) {
   try {
-    weatherContainer.remove();
-
     //using geo data to use onecall
     const local = await fetch(
       `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&units=imperial&exclude={alerts}&appid=44fd4a683d34b7393e0bfa504d69c463`
@@ -70,6 +92,7 @@ const localWeather = async function (lat, lng) {
     );
     const dataGeo = await resGeo.json();
     currCity = dataGeo.address.city;
+    currState = dataGeo.address.state;
 
     //parsing data
     const localWeatherData = await local.json();
@@ -94,6 +117,8 @@ const runGeo = async function () {
 runGeo();
 
 const getCityData = async function (city) {
+  //clear current forecast
+  clearContainer();
   //fetching data based on city
   const cityFetch = await fetch(`
       https://api.openweathermap.org/data/2.5/weather?q=${city}
@@ -128,7 +153,7 @@ const cityString = function (e) {
   clearString();
 };
 
-// //Run city string on enter based on input
+//Run city string on enter based on input
 const enterKeyPressed = function (e) {
   if (e.keyCode == 13) {
     e.preventDefault();
