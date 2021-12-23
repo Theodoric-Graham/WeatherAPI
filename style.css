@@ -3,7 +3,7 @@
   text-align: center;
 }
 header {
-  background-color: rgb(96, 170, 96);
+  background-color: rgb(143, 182, 143);
   color: black;
 }
 button {
@@ -35,12 +35,44 @@ aside {
   margin: 0 0 20px 0;
 }
 
+body {
+  background-color: rgb(58, 134, 134);
+}
+.current-city {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(175, 149, 130);
+  margin: 0 10px;
+  margin-left: 10%;
+  margin-right: 10%;
+  border-color: black;
+  border-style: solid;
+}
+
 .weather-forecast .weather-forecast-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 0 10px;
+  border-color: black;
+  border-style: solid;
+  background-color: rgb(177, 176, 144);
+  width: 200px;
+}
+
+.five-day {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-container {
+  background-color: rgb(180, 180, 175);
+  width: 100%;
   border-color: black;
   border-style: solid;
 }
