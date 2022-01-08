@@ -1,15 +1,14 @@
 /*
     SPACING SYSTEM (px)
     2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
-
     FONT SIZE SYSTEM (px)
     10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
     */
 
 * {
-  font-family: 'Montserrat', sans-serif;
-  padding: 1px;
-  text-align: center;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -85,7 +84,6 @@ header {
   color: #fff4e6;
   align-items: center;
 }
-
 .btn-city:first-child {
   background-color: #495057;
   padding: 8px;
@@ -137,7 +135,6 @@ span {
   font-size: 12px;
   font-weight: bold;
 }
-
 .search-container {
   position: absolute;
   top: 32px;
@@ -207,7 +204,6 @@ span {
   font-size: 14px;
   margin-bottom: 4px;
 }
-
 .icon-current {
   width: 24px;
   height: 24px;
