@@ -30,7 +30,7 @@ const populateFields = function (data) {
 };
 
 const clearFields = function () {
-  document.getElementById('city-name').innerHTML = 0;
+  document.getElementById('city-name').innerHTML = '';
   document.getElementById('temp').innerHTML = 0;
   document.getElementById('wind').innerHTML = 0;
   document.getElementById('humidity').innerHTML = 0;
@@ -50,21 +50,30 @@ const renderForecast = function (dataArr) {
     const html = `
     
     <div class="weather-forecast" id="${'old'}">
-    <div class="weather-forecast-item">
-    <div class="city-state">${currCity}, ${currState} </div>
-    
-    <div class="day">${day}</div>
-    <div class="img-container">
-    <img src="http://openweathermap.org/img/wn/${
-      el.weather[0].icon
-    }@2x.png" alt="weather icon" class="w-icon" />
-    </div>
-    <div class="temp">Night: ${el.temp.night}</div>
-    <div class="temp">Day: ${el.temp.day}</div>
-    <div class="wind">Wind Speed: ${el.wind_speed} mph</div>
-    <div class="humidity">Humidity: ${el.humidity}</div>
-    <div class="uv">UV Index: ${el.uvi}</div>
-    </div>
+      <div class="city-day">
+        <p class="forecast-text city-state">${currCity}, ${currState} </p>
+        <p class="forecast-text day">${day}</p>
+      </div>
+      <div class="img-container">
+        <img src="http://openweathermap.org/img/wn/${
+          el.weather[0].icon
+        }@2x.png" alt="weather icon" class="w-icon" />
+      </div>
+      <div class="forecast-info">
+        <p class="forecast-text forecast-text-bottom  temp">Night: ${
+          el.temp.night
+        }</p>
+        <p class="forecast-text forecast-text-bottom temp">Day: ${
+          el.temp.day
+        }</p>
+        <p class="forecast-text forecast-text-bottom wind">Wind Speed: ${
+          el.wind_speed
+        } mph</p>
+        <p class="forecast-text forecast-text-bottom humidity">Humidity: ${
+          el.humidity
+        }</p>
+        <p class="forecast-text forecast-text-bottom uv">UV Index: ${el.uvi}</p>
+      </div>
     `;
     //appending to DOM
     forecastContainer.insertAdjacentHTML('beforeend', html);
@@ -78,7 +87,8 @@ const clearContainer = function () {
     el.remove();
   });
 };
-clearBtn.addEventListener('click', clearContainer);
+
+// clearBtn.addEventListener('click', clearContainer);
 
 const localWeather = async function (lat, lng) {
   try {
