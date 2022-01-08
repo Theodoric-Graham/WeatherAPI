@@ -5,52 +5,236 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Merriweather&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
     <title>Weather City Dashboard</title>
     <script defer src="script.js"></script>
   </head>
   <body>
+
+      <!-- Header -->
+
     <header>
-      <h1>Welcome to my Weather Dashboard!</h1>
-    </header>
-    <main class="flex-row justify-space-between">
-      <div class="col-12 col-md-4">
-        <div class="card">
-          <h3 class="card-header text-uppercase">Search by City</h3>
-          <form id="weather-form" class="card-body">
-            <label class="form-label" for="city">City</label>
-            <input
-              name="city"
-              id="city"
-              type="text"
-              autofocus="true"
-              class="form-input"
-            />
-            <button type="submit" class="btn-weather">Get Weather</button>
-            <br />
-            <h2>Examples:</h2>
-            <div class="btn-container">
-              <button id="San Antonio">San Antonio</button>
-              <button id="Austin">Austin</button>
-              <button id="Houston">Houston</button>
-              <button id="Corpus Christi">Corpus Christi</button>
-            </div>
-          </form>
-        </div>
+      <div class="logo-container">
+        <span>Powered by</span>
+        <img
+          src="https://th.bing.com/th/id/R.02909d1058eb4ac2ea6789d3231e94ca?rik=tnqsAFfY81ng3A&riu=http%3a%2f%2fwww.esolve.co.za%2fimages%2fassets%2flogo_OpenWeatherMap_orange_website.png&ehk=ut7NW%2buDqHbkHcB%2fmZXquqWSXlYGnARE16b5xz%2fgR8U%3d&risl=&pid=ImgRaw&r=0"
+          alt="open weather map logo"
+          class="logo-weather-map"
+        />
       </div>
+      <h1>Five day forecast</h1>
+      <div class="btn-container">
+        <button class="btn-city" id="San Antonio">
+          San Antonio
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
+
+        <button class="btn-city" id="Austin">
+          Austin
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
+        <button class="btn-city" id="Houston">
+          Houston
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
+        <button class="btn-city" id="Corpus Christi">
+          Corpus Christi
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="search-container">
+        <h3>Search by City</h3>
+        <form>
+          <input name="city" id="city" type="text" class="form-input" />
+          <button type="submit" class="btn-weather">
+            Get Weather
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </header>
+
+    <!-- Current City Info -->
+    <main>
       <section class="current-city">
-        <button class="clear">Clear</button>
-        <h2>Current City:</h2>
-        <p id="city-name"></p>
-        <h3>Temperature:</h3>
-        <p id="temp">0</p>
-        <h3>Wind:</h3>
-        <p id="wind">0</p>
-        <h3>Humidity:</h3>
-        <p id="humidity">0</p>
-        <h3>UV Index:</h3>
-        <p id="uv">0</p>
+        <!-- <button class="clear">Clear</button> -->
+        <div class="current-info">
+          <h2>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              class="icon-current"
+            >
+              <path fill="none" d="M0 0h24v24H0z" />
+              <path
+                d="M19 21H5a1 1 0 0 1-1-1v-9H1l10.327-9.388a1 1 0 0 1 1.346
+              0L23 11h-3v9a1 1 0 0 1-1 1zm-6-2h5V9.157l-6-5.454-6
+              5.454V19h5v-6h2v6z"
+              />
+            </svg>
+            Current City:
+          </h2>
+          <p class="info" id="city-name"></p>
+          <h2>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              class="icon-current"
+            >
+              <path fill="none" d="M0 0h24v24H0z" />
+              <path
+                d="M8 5a4 4 0 1 1 8 0v5.255a7 7 0 1 1-8 0V5zm1.144 6.895a5 5
+              0 1 0 5.712 0L14 11.298V5a2 2 0 1 0-4
+              0v6.298l-.856.597zm1.856.231V5h2v7.126A4.002 4.002 0 0 1 12 20a4 4
+              0 0 1-1-7.874zM12 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"
+              />
+            </svg>
+            Temp &#8457 :
+          </h2>
+          <div class="temp-info">
+            <p class='info' id="temp">0</p>
+          </div>
+          <h2>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              class="icon-current"
+            >
+              <path fill="none" d="M0 0h24v24H0z" />
+              <path
+                d="M10.5 17H4v-2h6.5a3.5 3.5 0 1 1-3.278 4.73l1.873-.703A1.5
+              1.5 0 1 0 10.5 17zM5 11h13.5a3.5 3.5 0 1 1-3.278
+              4.73l1.873-.703A1.5 1.5 0 1 0 18.5 13H5a3 3 0 0 1 0-6h8.5a1.5 1.5
+              0 1 0-1.405-2.027l-1.873-.702A3.501 3.501 0 0 1 17 5.5 3.5 3.5 0 0
+              1 13.5 9H5a1 1 0 1 0 0 2z"
+              />
+            </svg>
+            Wind:
+          </h2>
+          <p class="info" id="wind">0</p>
+          <h2>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              class="icon-current"
+            >
+              <path fill="none" d="M0 0h24v24H0z" />
+              <path
+                d="M14 18v-2h3.5a3.5 3.5 0 1 0-2.5-5.95V10a6 6 0 1 0-12
+              0v.007H1V10a8 8 0 0 1 15.458-2.901A5.5 5.5 0 1 1 17.5 18H14zm-8
+              2h10v2H6v-2zm0-8h8v2H6v-2zm-4 4h10v2H2v-2z"
+              />
+            </svg>
+            Humidity:
+          </h2>
+          <p class="info" id="humidity">0</p>
+          <h2>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              class="icon-current"
+            >
+              <path fill="none" d="M0 0h24v24H0z" />
+              <path
+                d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4
+            0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515
+            4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95
+            18.364l1.414-1.414 2.121 2.121-1.414
+            1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414
+            2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414
+            2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"
+              />
+            </svg>
+            UV Index:
+          </h2>
+          <p class="info" id="uv">0</p>
+        </div>
       </section>
+
+      <!-- 5 Day Forcast dynamic HTML -->
       <section class="five-day"></section>
     </main>
   </body>
+  <footer>
+  </footer>
 </html>
