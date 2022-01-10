@@ -48,8 +48,8 @@ article {
 
 footer {
   margin-top: 20px;
-  border-bottom: 30px solid #ffc07888;
-  position: absolute;
+  border-bottom: 30px solid #ffc0782f;
+  position: fixed;
   right: 0;
   bottom: 0;
   left: 0;
